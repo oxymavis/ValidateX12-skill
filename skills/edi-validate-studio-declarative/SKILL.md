@@ -13,24 +13,19 @@ description: >-
 
 This directory is a **standalone knowledge package**. It encodes the same capabilities as the reference Python implementation using **YAML, JSON, OpenAPI 3, and JSON Schema** only. No `.py` files are required for an AI to reason about behavior, generate documentation, or scaffold another stack.
 
-## Where to install this skill
+## Where this skill lives (agent sync)
 
-Many agents expect skills under a top-level **`skills/`** directory (each skill is its own subfolder with `SKILL.md` at the root of that subfolder).
-
-**Recommended layout**
+Your agent expects:
 
 ```text
-skills/
-  edi-validate-studio-declarative/   # or any folder name your agent lists
-    SKILL.md
-    manifest.json
-    formats/
-    ...
+{skills_dir}/
+  └── edi-validate-studio-declarative/
+      └── SKILL.md   ← this file (with manifest.json and formats/ as siblings)
 ```
 
-Copy the **contents** of this repository into `skills/edi-validate-studio-declarative/` (or rename the folder; keep `SKILL.md` next to `manifest.json` and `formats/`).
+**In this repository**, set **`{skills_dir}`** to the folder **`skills/`** at the repo root. This clone already contains `skills/edi-validate-studio-declarative/SKILL.md` — do not point `{skills_dir}` at the repository root unless every skill is a direct child of that root.
 
-**Cursor Desktop** uses the same idea under `~/.cursor/skills/<folder-name>/`. If you use both, you can keep two copies or symlink one to the other.
+**Cursor Desktop** can mirror the same layout under `~/.cursor/skills/edi-validate-studio-declarative/` (copy the whole `edi-validate-studio-declarative` folder).
 
 ## Source of truth map
 

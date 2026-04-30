@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "EDI Validate Studio — Declarative Skill Kit",
+  "version": "1.0.0",
+  "encoding": "UTF-8",
+  "purpose": "Portable capability specification for AI agents; no Python runtime required to interpret these files.",
+  "import_paths": {
+    "generic_agent_skills_dir": "skills/<skill-folder>/SKILL.md",
+    "this_repo_skills_root": "skills/",
+    "this_skill_folder": "skills/edi-validate-studio-declarative/",
+    "cursor_desktop": "~/.cursor/skills/<skill-folder>/SKILL.md"
+  },
+  "entrypoints": {
+    "cursor_skill": "SKILL.md",
+    "http_contract": "formats/openapi.yaml",
+    "builtin_profiles": "formats/profiles.yaml",
+    "detection_algorithm": "formats/profile-scoring.yaml",
+    "capabilities": "formats/capabilities.yaml",
+    "workflow": "formats/workflow.yaml",
+    "json_schemas": "formats/schemas/"
+  },
+  "files": [
+    "skills/edi-validate-studio-declarative/SKILL.md",
+    "skills/edi-validate-studio-declarative/manifest.json",
+    "skills/edi-validate-studio-declarative/formats/openapi.yaml",
+    "skills/edi-validate-studio-declarative/formats/profiles.yaml",
+    "skills/edi-validate-studio-declarative/formats/profile-scoring.yaml",
+    "skills/edi-validate-studio-declarative/formats/capabilities.yaml",
+    "skills/edi-validate-studio-declarative/formats/workflow.yaml",
+    "skills/edi-validate-studio-declarative/formats/built-in-plugins.json",
+    "skills/edi-validate-studio-declarative/formats/supported-uploads.json",
+    "skills/edi-validate-studio-declarative/formats/schemas/validation-point.schema.json",
+    "skills/edi-validate-studio-declarative/formats/schemas/validation-finding.schema.json",
+    "skills/edi-validate-studio-declarative/formats/schemas/detected-profile.schema.json"
+  ]
+}
