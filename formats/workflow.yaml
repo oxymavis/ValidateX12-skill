@@ -1,0 +1,46 @@
+# End-user and API-equivalent workflow (language-agnostic).
+phases:
+  - id: ingest
+    title: Upload specs
+    actor: client
+    actions:
+      - POST multipart to /api/spec/upload with field specFiles (repeatable).
+    success_artifacts:
+      - specId
+      - documents with sha256
+      - points and pointGroups
+      - validationMode
+      - validator paths under data/generated_validators (reference deployment)
+
+  - id: review
+    title: Review extracted points
+    actor: human_or_agent
+    actions:
+      - Optional GET /api/spec/{specId} to reload bundle.
+
+  - id: validate
+    title: Run validation on EDI text
+    actor: client
+    actions:
+      - POST /api/validate JSON body specId + ediMessage.
+    server_checks:
+      - Bundle exists for specId.
+      - Manifest and rules exist for buildVersion (default v1).
+      - Document fingerprints in manifest match bundle (binding).
+
+  - id: report
+    title: Export Markdown
+    actor: client
+    actions:
+      - Follow downloadUrl from validate response (GET /api/report/{reportId}).
+
+error_paths:
+  upload_all_failed:
+    http: 400
+    meaning: Every file failed extraction.
+  spec_not_found:
+    http: 404
+    meaning: Unknown specId.
+  binding_or_artifacts_missing:
+    http: 409
+    meaning: Re-upload spec; do not reuse another spec's validator.

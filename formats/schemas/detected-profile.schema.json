@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local/edi-validate-studio/detected-profile.schema.json",
+  "title": "DetectedProfile",
+  "type": "object",
+  "required": ["name", "kind", "confidence", "matchReason", "pluginKey"],
+  "properties": {
+    "name": { "type": "string" },
+    "kind": { "type": "string", "description": "Reference implementation uses built_in_example for matched built-ins." },
+    "confidence": { "type": "string", "enum": ["high", "medium"] },
+    "matchReason": { "type": "string" },
+    "pluginKey": { "type": "string" }
+  },
+  "additionalProperties": true
+}

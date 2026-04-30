@@ -1,0 +1,54 @@
+product: EDI Validate Studio
+summary: >-
+  Generic customer-spec-driven EDI validation with optional built-in retail
+  profile plugins, bilingual output, and Markdown reports.
+
+capabilities:
+  - id: SPEC_UPLOAD
+    title: Multi-file spec upload
+    detail: Accept PDF, DOCX, XLSX, XLS, TXT, MD; reject others; track per-file parse failures.
+
+  - id: TEXT_EXTRACTION
+    title: Normalize specs to plain text
+    detail: Enables downstream heuristic rule extraction.
+
+  - id: RULE_EXTRACTION
+    title: Heuristic validation-point mining
+    detail: >-
+      Produces ValidationPoint list with categories, optional segment/element/qualifier/expected,
+      compiled vs informational, bilingual descriptions when derivable.
+
+  - id: SPEC_BINDING
+    title: Per-upload spec identity and artifacts
+    detail: >-
+      specId (short hex), persisted bundle JSON, uploads with SHA-256,
+      generated_validators/{specId}/{buildVersion}/ manifest + rules + validator artifact;
+      validate endpoint refuses mismatched fingerprints (HTTP 409).
+
+  - id: GENERIC_ENGINE
+    title: Generic X12 validation over extracted points
+    detail: Runs when mode is generated_spec or as fallback after plugin failure.
+
+  - id: BUILTIN_PLUGINS
+    title: Optional profile-specific validators
+    detail: >-
+      Activated when profile detection scores a known plugin_key; see formats/profiles.yaml
+      and formats/built-in-plugins.json.
+
+  - id: BILINGUAL_FINDINGS
+    title: Chinese + English messages
+    detail: Each finding exposes messageZh and messageEn (JSON camelCase in API).
+
+  - id: MARKDOWN_REPORT
+    title: Downloadable audit report
+    detail: GET /api/report/{reportId} returns application attachment.
+
+  - id: WEB_UI
+    title: Single-page workflow
+    detail: Same-origin static UI; not required for agent-only use of this skill kit.
+
+non_capabilities:
+  - Authentication / RBAC
+  - Database audit trail
+  - Automatic deletion of stored uploads (V1 retains files)
+  - Guaranteed semantic completeness of NLP rule extraction

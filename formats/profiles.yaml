@@ -1,0 +1,81 @@
+# Built-in trading-partner profile patterns (source: profile_detector.PROFILES).
+version: 1
+profiles:
+  - key: blujay_210
+    display_name: BluJay 210
+    keywords:
+      - EDI 210
+      - BLUJAY TMS INVOICE VALIDATION PROFILE
+      - BEGINNING SEGMENT FOR CARRIER'S INVOICE
+    id_patterns:
+      - EDI 210 SPECS
+      - X12 VERSION 004010
+      - MOTOR CARRIER FREIGHT DETAILS AND INVOICE
+
+  - key: amazon
+    display_name: Amazon Warehouse
+    keywords:
+      - AMAZON WAREHOUSE
+      - AMAZON.COM
+      - AMAZON
+    id_patterns:
+      - "ZZ:AMAZON/AMAZON"
+      - AMAZON_856
+
+  - key: delhaize
+    display_name: Delhaize America
+    keywords:
+      - DELHAIZE AMERICA
+      - DELHAIZE
+    id_patterns:
+      - "07:5400110000009/540011000"
+      - 51007HO
+
+  - key: fleet_farm
+    display_name: Fleet Farm
+    keywords:
+      - FLEET FARM
+      - MILLS FLEET FARM
+    id_patterns:
+      - "12:4147318121/4147318121"
+      - "0004627"
+
+  - key: burlington
+    display_name: Burlington Coat Factory
+    keywords:
+      - BURLINGTON
+      - BURLINGTON MERCHANDISING CORP
+    id_patterns:
+      - "08:6126750000/6126750000"
+      - "0051065"
+
+  - key: sps
+    display_name: SPS / Topco
+    keywords:
+      - TOPCO
+      - SPS COMMERCE
+      - SPARTAN STORES
+      - NASH FINCH
+    id_patterns:
+      - 004010UCS
+      - 51012SP
+      - 51012SI
+      - 51012NF
+
+  - key: walmart
+    display_name: Walmart USA
+    keywords:
+      - WALMART
+      - WAL-MART STORES
+    id_patterns:
+      - "08:925485US00/925485US00"
+      - 51010B
+
+  - key: doitbest
+    display_name: DO IT BEST HARDWARE
+    keywords:
+      - DO IT BEST
+      - DO IT BEST HARDWARE
+    id_patterns:
+      - "ZZ:DOITBESTVP/DOITBESTVP"
+      - "0051064"

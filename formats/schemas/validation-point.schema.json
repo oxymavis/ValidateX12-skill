@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local/edi-validate-studio/validation-point.schema.json",
+  "title": "ValidationPoint",
+  "type": "object",
+  "required": [
+    "id",
+    "title",
+    "source_line",
+    "source_file",
+    "category",
+    "rule_type"
+  ],
+  "properties": {
+    "id": { "type": "string" },
+    "title": { "type": "string" },
+    "source_line": { "type": "string" },
+    "source_file": { "type": "string" },
+    "category": { "type": "string" },
+    "rule_type": { "type": "string" },
+    "segment": { "type": "string", "default": "" },
+    "element": { "type": "string", "default": "" },
+    "qualifier": { "type": "string", "default": "" },
+    "expected": {
+      "type": "array",
+      "items": { "type": "string" },
+      "default": []
+    },
+    "severity": { "type": "string", "default": "Error" },
+    "compiled": { "type": "boolean", "default": false },
+    "description_zh": { "type": "string", "default": "" },
+    "description_en": { "type": "string", "default": "" },
+    "metadata": { "type": "object", "additionalProperties": true, "default": {} }
+  },
+  "additionalProperties": true
+}

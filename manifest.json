@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "EDI Validate Studio — Declarative Skill Kit",
+  "version": "1.0.0",
+  "encoding": "UTF-8",
+  "purpose": "Portable capability specification for AI agents; no Python runtime required to interpret these files.",
+  "entrypoints": {
+    "cursor_skill": "SKILL.md",
+    "http_contract": "formats/openapi.yaml",
+    "builtin_profiles": "formats/profiles.yaml",
+    "detection_algorithm": "formats/profile-scoring.yaml",
+    "capabilities": "formats/capabilities.yaml",
+    "workflow": "formats/workflow.yaml",
+    "json_schemas": "formats/schemas/"
+  },
+  "files": [
+    "SKILL.md",
+    "manifest.json",
+    "formats/openapi.yaml",
+    "formats/profiles.yaml",
+    "formats/profile-scoring.yaml",
+    "formats/capabilities.yaml",
+    "formats/workflow.yaml",
+    "formats/built-in-plugins.json",
+    "formats/supported-uploads.json",
+    "formats/schemas/validation-point.schema.json",
+    "formats/schemas/validation-finding.schema.json",
+    "formats/schemas/detected-profile.schema.json"
+  ]
+}

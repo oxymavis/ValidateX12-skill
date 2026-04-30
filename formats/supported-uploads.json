@@ -1,0 +1,12 @@
+{
+  "allowed_extensions": [".pdf", ".docx", ".xlsx", ".xls", ".txt", ".md"],
+  "extraction_notes": {
+    ".pdf": "Page-wise text extraction (reference stack: pdfplumber).",
+    ".docx": "Unpack word/document.xml, strip tags, normalize entities.",
+    ".xlsx": "All sheets as text rows (reference stack: pandas + openpyxl).",
+    ".xls": "Prefer same path as xlsx; on failure use binary token heuristics.",
+    ".txt": ".md": "UTF-8 decode with replacement for invalid bytes."
+  },
+  "typical_max_request_bytes": 26214400,
+  "multipart_field_name": "specFiles"
+}

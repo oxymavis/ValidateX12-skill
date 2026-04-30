@@ -1,0 +1,24 @@
+{
+  "description": "Allow-listed built-in validators keyed by profile_detector plugin_key. Reference implementation lives in Python repo; this file is the portable registry for agents.",
+  "plugin_key_to_module_hint": {
+    "blujay_210": "edi_210_validator.validate_edi_210 (210 message text)",
+    "amazon": "validate_amazon_856_spec.validate_amazon_856 (segments)",
+    "burlington": "validate_burlington_856_spec.validate_burlington_856",
+    "delhaize": "validate_delhaize_856_spec.validate_delhaize_856",
+    "doitbest": "validate_doitbest_856_spec.validate_doitbest_856",
+    "fleet_farm": "validate_fleet_farm_856_spec.validate_fleet_farm_856",
+    "sps": "validate_sps_commerce_856_spec.validate_sps_commerce_856",
+    "walmart": "validate_walmart_856_spec.validate_walmart_856"
+  },
+  "validation_mode_when_plugin_matched": "built_in_profile",
+  "validation_mode_when_no_plugin": "generated_spec",
+  "plugin_failure_behavior": {
+    "http_status_on_validate": 200,
+    "response_field": "fallback",
+    "fallback_mode": "generated_spec",
+    "messages": {
+      "zh": "内置插件校验失败，已回退到通用规则引擎。",
+      "en": "Built-in profile validation failed. The app fell back to the generic rule engine."
+    }
+  }
+}

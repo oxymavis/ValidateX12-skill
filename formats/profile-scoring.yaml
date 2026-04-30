@@ -1,0 +1,24 @@
+# Mirrors edi_validate_web_app/core/profile_detector.py logic (declarative spec).
+algorithm: best_score_wins
+inputs:
+  - name: texts
+    description: Plain text extracted from all uploaded spec files, concatenated for scoring.
+  - name: file_names
+    description: Original upload filenames, concatenated for scoring.
+preprocess:
+  haystack: "UPPERCASE(join(texts with space))"
+  file_haystack: "UPPERCASE(join(file_names with space))"
+scoring:
+  per_profile:
+    keyword_hit: { points: 3, match_if: "keyword UPPER in haystack OR keyword UPPER in file_haystack" }
+    id_pattern_hit: { points: 5, match_if: "pattern UPPER in haystack OR pattern UPPER in file_haystack" }
+  winner: "profile with highest total score; if tie, later definition order may win (implementation-specific)"
+confidence_from_score:
+  high: { min_total_score: 8 }
+  medium: { min_total_score: 1 }
+output:
+  detected_profile:
+    fields: [name, kind, confidence, match_reason, plugin_key]
+  kind_literal: "built_in_example"
+  match_reason_prefix: "Matched "
+  match_reason_max_tokens: 4

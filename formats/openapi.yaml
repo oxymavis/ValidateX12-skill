@@ -1,0 +1,214 @@
+openapi: 3.0.3
+info:
+  title: EDI Validate Studio HTTP API
+  version: "1.0.0"
+  description: >-
+    Contract derived from edi_validate_web_app/app.py.
+    Default server bind in reference implementation host 0.0.0.0 port 5050.
+
+servers:
+  - url: http://127.0.0.1:5050
+    description: Local reference deployment
+
+paths:
+  /:
+    get:
+      summary: HTML shell (EDI Validate Studio UI)
+      responses:
+        "200":
+          description: HTML document
+
+  /api/spec/{specId}:
+    get:
+      summary: Load persisted spec bundle JSON
+      parameters:
+        - name: specId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Spec bundle
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SpecBundle"
+        "404":
+          description: Spec bundle not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /api/spec/upload:
+    post:
+      summary: Upload spec files and extract validation points
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+                - specFiles
+              properties:
+                specFiles:
+                  type: array
+                  items:
+                    type: string
+                    format: binary
+      responses:
+        "200":
+          description: Upload and extraction result
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UploadResponse"
+        "400":
+          description: No files or all parse failures
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /api/validate:
+    post:
+      summary: Validate EDI message against a specId
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - specId
+                - ediMessage
+              properties:
+                specId:
+                  type: string
+                ediMessage:
+                  type: string
+      responses:
+        "200":
+          description: Validation result
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidateResponse"
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "409":
+          description: Spec binding mismatch or missing generated artifacts
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /api/report/{reportId}:
+    get:
+      summary: Download Markdown report
+      parameters:
+        - name: reportId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Markdown file attachment
+          content:
+            text/markdown:
+              schema:
+                type: string
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+
+    DetectedProfile:
+      type: object
+      properties:
+        name: { type: string }
+        kind: { type: string }
+        confidence: { type: string }
+        matchReason: { type: string }
+        pluginKey: { type: string }
+
+    ValidationPoint:
+      $ref: "schemas/validation-point.schema.json"
+
+    ValidationFinding:
+      $ref: "schemas/validation-finding.schema.json"
+
+    UploadResponse:
+      type: object
+      description: Superset of fields returned by upload endpoint
+      properties:
+        specId: { type: string }
+        specName: { type: string }
+        documents:
+          type: array
+          items: { type: object }
+        detectedProfile:
+          $ref: "#/components/schemas/DetectedProfile"
+        validationMode:
+          type: string
+          enum: [generated_spec, built_in_profile]
+        validator:
+          type: object
+        summary:
+          type: object
+        pointGroups:
+          type: array
+          items: { type: object }
+        points:
+          type: array
+          items:
+            $ref: "#/components/schemas/ValidationPoint"
+        unsupported:
+          type: array
+          items: { type: object }
+        createdAt: { type: string }
+
+    SpecBundle:
+      allOf:
+        - $ref: "#/components/schemas/UploadResponse"
+
+    ValidateResponse:
+      type: object
+      properties:
+        validationMode:
+          type: string
+        summary:
+          type: object
+          properties:
+            total: { type: integer }
+            errors: { type: integer }
+            warnings: { type: integer }
+        findings:
+          type: array
+          items:
+            $ref: "#/components/schemas/ValidationFinding"
+        downloadUrl:
+          type: string
+        fallback:
+          type: object
+          description: Present when built-in plugin failed and generic engine was used instead
