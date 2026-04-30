@@ -13,13 +13,24 @@ description: >-
 
 This directory is a **standalone knowledge package**. It encodes the same capabilities as the reference Python implementation using **YAML, JSON, OpenAPI 3, and JSON Schema** only. No `.py` files are required for an AI to reason about behavior, generate documentation, or scaffold another stack.
 
-## How to import as a Skill (Cursor)
+## Where to install this skill
 
-Copy the entire folder `skillkit-edi-validate-studio/` into:
+Many agents expect skills under a top-level **`skills/`** directory (each skill is its own subfolder with `SKILL.md` at the root of that subfolder).
 
-`~/.cursor/skills/edi-validate-studio-declarative/`
+**Recommended layout**
 
-(Keep `SKILL.md` at the root of that copied folder.) Other platforms: point their skill importer at the same folder if they accept markdown + attachments.
+```text
+skills/
+  edi-validate-studio-declarative/   # or any folder name your agent lists
+    SKILL.md
+    manifest.json
+    formats/
+    ...
+```
+
+Copy the **contents** of this repository into `skills/edi-validate-studio-declarative/` (or rename the folder; keep `SKILL.md` next to `manifest.json` and `formats/`).
+
+**Cursor Desktop** uses the same idea under `~/.cursor/skills/<folder-name>/`. If you use both, you can keep two copies or symlink one to the other.
 
 ## Source of truth map
 

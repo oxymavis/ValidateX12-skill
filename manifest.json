@@ -4,6 +4,11 @@
   "version": "1.0.0",
   "encoding": "UTF-8",
   "purpose": "Portable capability specification for AI agents; no Python runtime required to interpret these files.",
+  "import_paths": {
+    "generic_agent_skills_dir": "skills/<skill-folder>/SKILL.md",
+    "example_folder_name": "edi-validate-studio-declarative",
+    "cursor_desktop": "~/.cursor/skills/<skill-folder>/SKILL.md"
+  },
   "entrypoints": {
     "cursor_skill": "SKILL.md",
     "http_contract": "formats/openapi.yaml",
