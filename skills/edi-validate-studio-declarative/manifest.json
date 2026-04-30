@@ -1,9 +1,9 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "EDI Validate Studio — Declarative Skill Kit",
+  "title": "EDI Validate Studio — Runnable Skill Kit",
   "version": "1.0.0",
   "encoding": "UTF-8",
-  "purpose": "Portable capability specification for AI agents; no Python runtime required to interpret these files.",
+  "purpose": "Portable runnable skill package with executable CLI and schema/API contracts.",
   "import_paths": {
     "generic_agent_skills_dir": "skills/<skill-folder>/SKILL.md",
     "this_repo_skills_root": "skills/",
@@ -17,7 +17,8 @@
     "detection_algorithm": "formats/profile-scoring.yaml",
     "capabilities": "formats/capabilities.yaml",
     "workflow": "formats/workflow.yaml",
-    "json_schemas": "formats/schemas/"
+    "json_schemas": "formats/schemas/",
+    "cli": "scripts/validate_cli.py"
   },
   "files": [
     "skills/edi-validate-studio-declarative/SKILL.md",
@@ -31,6 +32,7 @@
     "skills/edi-validate-studio-declarative/formats/supported-uploads.json",
     "skills/edi-validate-studio-declarative/formats/schemas/validation-point.schema.json",
     "skills/edi-validate-studio-declarative/formats/schemas/validation-finding.schema.json",
-    "skills/edi-validate-studio-declarative/formats/schemas/detected-profile.schema.json"
+    "skills/edi-validate-studio-declarative/formats/schemas/detected-profile.schema.json",
+    "skills/edi-validate-studio-declarative/scripts/validate_cli.py"
   ]
 }
